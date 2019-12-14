@@ -4,7 +4,7 @@ import { NativeModules, requireNativeComponent ,Platform } from 'react-native';
 const { AppleAuthentication } = NativeModules;
 
 export const RNSignInWithAppleButton = requireNativeComponent('RNCSignInWithAppleButton');
-
+export const AppleAuthenService = AppleAuthentication;
 export const SignInWithAppleButton = (buttonStyle, callBack) => {
   if(Platform.OS === 'ios'){
     return <RNSignInWithAppleButton style={buttonStyle} onPress={async () => {
