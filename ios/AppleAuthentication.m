@@ -81,15 +81,14 @@ RCT_EXPORT_METHOD(requestAsync:(NSDictionary *)options
 
 - (void)authorizationController:(ASAuthorizationController *)controller
    didCompleteWithAuthorization:(ASAuthorization *)authorization  API_AVAILABLE(ios(13.0)){
-  ASAuthorizationAppleIDCredential* credential = authorization.credential;
-  NSDictionary *givenName;
-  NSDictionary *familyName;
-  NSLog(@"credential",credential);
-
-  if (credential.fullName) {
-    givenName = RCTNullIfNil(credential.fullName.givenName);
-    familyName = RCTNullIfNil(credential.fullName.familyName);
-  }
+  ASAuthorizationAppleIDCredential *credential = authorization.credential;
+  NSString *givenName;
+  NSString *familyName;
+  NSString *email = credential.email;
+  // if (credential.fullName) {
+    givenName = credential.fullName.givenName;
+    familyName = credential.fullName.familyName;
+  // }
   
   NSString *authorizationCode;
   if (credential.authorizationCode) {
@@ -105,9 +104,9 @@ RCT_EXPORT_METHOD(requestAsync:(NSDictionary *)options
                          @"identityToken": RCTNullIfNil(identityToken),
                          @"firstName": givenName,
                          @"lastName": familyName,
-                         @"email": RCTNullIfNil(credential.email),
+                         @"email": email,
                          @"user": credential.user,
-                         // @"authorizedScopes": credential.authorizedScopes,
+                         @"authorizedScopes": credential.authorizedScopes,
                          // @"realUserStatus": @(credential.realUserStatus),
                          // @"state": RCTNullIfNil(credential.state),
                          };
