@@ -84,6 +84,8 @@ RCT_EXPORT_METHOD(requestAsync:(NSDictionary *)options
   ASAuthorizationAppleIDCredential* credential = authorization.credential;
   NSDictionary *givenName;
   NSDictionary *familyName;
+  NSLog(@"credential",credential);
+
   if (credential.fullName) {
     givenName = RCTNullIfNil(credential.fullName.givenName);
     familyName = RCTNullIfNil(credential.fullName.familyName);
